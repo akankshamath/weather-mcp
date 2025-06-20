@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "types": ["node"],
+    "allowJs": true,
+    "esModuleInterop": true,
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "skipLibCheck": true,
+    "lib": [
+      "ESNext"
+    ],
+    "jsx": "react-jsx",
+    "jsxImportSource": "hono/jsx",
+    "paths": {
+      "@modelcontextprotocol/sdk/*": [
+        "node_modules/@modelcontextprotocol/sdk/dist/*"
+      ]
+    },
+  },
+}
