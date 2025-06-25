@@ -1,8 +1,12 @@
 {
   "name": "weather-cloudfare",
   "scripts": {
+    "build": "tsc",
     "dev": "wrangler dev",
     "deploy": "wrangler deploy --minify",
+    "deploy:workers": "wrangler deploy --minify",
+    "deploy:lambda": "serverless deploy",
+    "deploy:both": "pnpm run deploy:workers && pnpm run deploy:lambda",
     "cf-typegen": "wrangler types --env-interface CloudflareBindings"
   },
   "dependencies": {
@@ -13,6 +17,11 @@
     "zod": "^3.25.67"
   },
   "devDependencies": {
+    "@types/aws-lambda": "^8.10.150",
+    "@types/node": "^24.0.4",
+    "serverless": "^4.17.1",
+    "serverless-esbuild": "^1.55.1",
+    "typescript": "^5.8.3",
     "wrangler": "^4.4.0"
   }
 }

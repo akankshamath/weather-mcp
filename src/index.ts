@@ -1,7 +1,11 @@
+import { webcrypto } from 'node:crypto'
+if (!globalThis.crypto) globalThis.crypto = webcrypto as any
+
 import { Hono } from 'hono'
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js'
 import { StreamableHTTPTransport } from '@hono/mcp'
 import { z } from 'zod'
+import { handle } from 'hono/aws-lambda'
 
 type Env = {
   OPENWEATHER_API_KEY: string
@@ -70,6 +74,15 @@ const createMcpServer = (env: Env) => {
   return mcpServer
 }
 
+app.use('*', async(c, next) => {
+  if (!c.env?.OPENWEATHER_API_KEY && process.env.OPENWEATHER_API_KEY) {
+    c.env = {
+      OPENWEATHER_API_KEY: process.env.OPENWEATHER_API_KEY || ""
+    } as Env
+  }
+  await next()
+})
+
 app.all('/mcp', async (c) => {
   const mcpServer = createMcpServer(c.env)
   const transport = new StreamableHTTPTransport()
@@ -77,4 +90,5 @@ app.all('/mcp', async (c) => {
   return transport.handleRequest(c)
 })
 
+export const handler = handle(app)
 export default app

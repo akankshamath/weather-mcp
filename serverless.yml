@@ -1,0 +1,36 @@
+service: mcp-weather-server
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: ap-southeast-1
+  memorySize: 256
+  timeout: 30
+  environment:
+    OPENWEATHER_API_KEY: ${env:OPENWEATHER_API_KEY}
+  httpApi:
+    cors: true
+  deploymentBucket:
+    name: mcp-weather-deployments-1750852395
+
+build:
+  esbuild:
+    bundle: true
+    minify: true
+    target: node18
+    external:
+      - '@aws-sdk/*'
+
+functions:
+  mcpServer:
+    handler: src/index.handler
+    events:
+      - httpApi:
+          path: /{proxy+}
+          method: ANY
+      - httpApi:
+          path: /
+          method: ANY
+
+resources:
+  Resources:

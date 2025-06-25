@@ -1,0 +1,13 @@
+{
+  "name": "weather-cloudfare",
+  "scripts": {
+    "build": "tsc",
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy --minify",
+    "deploy:workers": "wrangler deploy --minify",
+    "deploy:lambda": "serverless deploy",
+    "deploy:both": "pnpm run deploy:workers && pnpm run deploy:lambda",
+    "cf-typegen": "wrangler types --env-interface CloudflareBindings"
+  },
+  "dependencies": {}
+}

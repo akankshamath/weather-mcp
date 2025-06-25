@@ -9,6 +9,8 @@
     "moduleResolution": "Bundler",
     "strict": true,
     "skipLibCheck": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
     "lib": [
       "ESNext"
     ],
@@ -18,6 +20,13 @@
       "@modelcontextprotocol/sdk/*": [
         "node_modules/@modelcontextprotocol/sdk/dist/*"
       ]
-    },
+    }
   },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
 }
