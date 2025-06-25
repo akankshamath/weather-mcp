@@ -100,7 +100,7 @@
         "Timeout": 30,
         "Environment": {
           "Variables": {
-            "OPENWEATHER_API_KEY": "5de29abedbf4dc0fc62c6e38fea1935c",
+            "OPENWEATHER_API_KEY": ${env:OPENWEATHER_API_KEY},
             "NODE_OPTIONS": "--enable-source-maps"
           }
         },
